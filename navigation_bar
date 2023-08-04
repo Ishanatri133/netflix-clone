@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_application_1/homepage.dart';
+import 'package:flutter_application_1/screen/ComingSoon.dart';
+import 'package:flutter_application_1/screen/Downloads.dart';
+import 'package:flutter_application_1/screen/More.dart';
+import 'package:flutter_application_1/screen/Search.dart';
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
+
+  @override
+  State<NavBar> createState() => _NavBarState();
+}
+
+class _NavBarState extends State<NavBar> {
+  int currentIndexs = 0;
+  final List screens = const [
+    HomePage(),
+    Search(),
+    DOWNLOADS(),
+    More(),
+    ComingSoon(),
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+       
+        body: screens[currentIndexs],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentIndexs,
+            type: BottomNavigationBarType.fixed,
+            onTap: (value) {
+              setState(() {
+                currentIndexs = value;
+              });
+            },
+            backgroundColor: Colors.black,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white.withOpacity(.60),
+            selectedFontSize: 13,
+            unselectedFontSize: 10,
+            items: const [
+              BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+              BottomNavigationBarItem(
+                  label: "Search", icon: Icon(Icons.search)),
+              BottomNavigationBarItem(
+                  label: "Downloads", icon: Icon(Icons.download)),
+              BottomNavigationBarItem(label: "List", icon: Icon(Icons.menu)),
+              BottomNavigationBarItem(
+                  label: "Settings", icon: Icon(Icons.settings)),
+            ]),
+      ),
+    );
+  }
+}
